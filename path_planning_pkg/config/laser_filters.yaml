@@ -1,0 +1,20 @@
+# laser_filters.yaml
+#
+# The RPLIDAR C1 is mounted at the front of the robot; the chassis blocks
+# the rear of the scan. This filter chain masks out the blocked rear arc
+# and republishes a clean forward-facing scan.
+#
+# Frame convention (REP-103 / ROS standard): 0 rad points forward (+x),
+# angles increase counter-clockwise. Keeping approximately -120° to +120°
+# (~ -2.094 to +2.094 rad) preserves a 240° front field of view and drops
+# the ~120° rear wedge that is physically blocked by the chassis.
+#
+# Subscribes: /scan
+# Publishes:  /scan_filtered
+
+scan_filter_chain:
+  - name: rear_blind_spot_removal
+    type: laser_filters/LaserScanAngularBoundsFilterInPlace
+    params:
+      lower_angle: -2.0944   # -120 deg
+      upper_angle: 2.0944    # +120 deg

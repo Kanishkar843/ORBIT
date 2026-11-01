@@ -1,0 +1,75 @@
+amcl:
+  ros__parameters:
+    use_sim_time: false
+
+    # === LASER MODEL ===
+
+    laser_model_type: likelihood_field
+    laser_max_range: 100.0
+    laser_min_range: -1.0
+    max_beams: 360
+    z_hit: 0.5
+    z_short: 0.05
+    z_max: 0.05
+    z_rand: 0.5
+    sigma_hit: 0.2
+    lambda_short: 0.1
+    do_beamskip: false
+    beam_skip_distance: 0.5
+    beam_skip_error_threshold: 0.9
+    beam_skip_threshold: 0.3
+
+    # === MOTION MODEL ===
+    robot_model_type: nav2_amcl::DifferentialMotionModel
+    alpha1: 0.2
+    alpha2: 0.2
+    alpha3: 0.2
+    alpha4: 0.2
+    alpha5: 0.1
+
+    # === FRAME IDs ===
+
+    base_frame_id: base_footprint
+    global_frame_id: map
+    odom_frame_id: odom
+    scan_topic: scan_filtered   # FIX: use laser_filters output, not raw /scan
+
+    # === PARTICLE FILTER ===
+    min_particles: 500
+    max_particles: 2000
+    pf_err: 0.05
+    pf_z: 0.99
+
+    # === UPDATE THRESHOLDS ===
+    update_min_d: 0.2
+    update_min_a: 0.5236
+
+    # === RESAMPLE ===
+    resample_interval: 2
+    recovery_alpha_slow: 0.001
+    recovery_alpha_fast: 0.1
+
+    # === INITIAL POSE ===
+    # FIX #4: set_initial_pose changed to false.
+    # Do NOT hardcode the robot's start position here — it is tied to one
+    # specific map and one specific physical placement. If the robot is placed
+    # anywhere else AMCL will start with a wrong prior and take a long time
+    # to converge (or never converge in a cluttered environment).
+    # Instead, after launching, use RViz → "2D Pose Estimate" to set the
+    # initial pose interactively. This works reliably for every run.
+    #
+    # If you always start the robot from the exact same spot, you can re-enable
+    # this block and fill in the correct x/y/yaw for your map:
+    #   set_initial_pose: true
+    #   initial_pose:
+    #     x: <your_x>
+    #     y: <your_y>
+    #     z: 0.0
+    #     yaw: <your_yaw_radians>
+    set_initial_pose: false
+
+    # === TF ===
+    tf_broadcast: true
+    transform_tolerance: 1.0
+    save_pose_rate: 0.5
+    first_map_only: false
