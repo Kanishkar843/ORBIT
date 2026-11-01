@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+build/
+dist/
+*.egg-info/
+
+# C++ / CMake
+CMakeFiles/
+CMakeCache.txt
+cmake-build-*/
+*.o
+*.so
+
+# ROS / colcon (if applicable)
+install/
+log/
+.colcon/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Logs and temporary files
+*.log
+*.tmp
+tmp/
+temp/
+
+# Credentials, tokens and private configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa
+id_ed25519
+secrets/
+credentials/
+
+# Machine-specific data and large generated artifacts
+datasets/
+data/raw/
+recordings/
+*.bag
+*.db3
+*.mcap
+*.pt
+*.pth
+*.onnx
+*.engine
+*.zip
+*.tar.gz
